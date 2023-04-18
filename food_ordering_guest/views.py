@@ -40,3 +40,15 @@ def signup(request):
     new_user.save()
     return redirect('login')
   return render(request,'signup.html')
+
+def starters(request):
+  return render(request,'starters.html')
+
+def mains(request):
+  return render(request,'mains.html')
+
+def desserts(request):
+  return render(request,'desserts.html')
+
+def drinks(request):
+  return render(request,'drinks.html')

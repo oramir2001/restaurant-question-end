@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+
+  <h1> Main dishes </h1>
+
+  <div>
+    <h3>סטייק אנטריקוט</h3>
+    <img src="{% static 'Stake.jpeg' %}" style="max-width:200px;">
+  </div>
+
+  <div>
+    <h3>עוף בגריל</h3>
+    <img src="{% static 'Chicken.jpeg' %}" style="max-width:200px;">
+  </div>
+
+  <div>
+    <h3>שניצל</h3>
+    <img src="{% static 'Shnitzel.jpeg' %}" style="max-width:200px;">
+  </div>
+
+  <div>
+    <h3>פסטה עגבניות</h3>
+    <img src="{% static 'TomatoPasta.jpeg' %}" style="max-width:200px;">
+  </div>
+
+{% endblock %}

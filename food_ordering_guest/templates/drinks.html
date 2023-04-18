@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+
+  <h1> Drinks </h1>
+
+  <div>
+    <h3>קוקה קולה</h3>
+    <img src="{% static 'CocaCola.jpeg' %}" style="max-width:200px;">
+  </div>
+
+  <div>
+    <h3>קוקה קולה זירו</h3>
+    <img src="{% static 'ZeroCocaCola.jpeg' %}" style="max-width:200px;">
+  </div>
+
+  <div>
+    <h3>פאנטה</h3>
+    <img src="{% static 'Fanta.jpeg' %}" style="max-width:200px;">
+  </div>
+
+  <div>
+    <h3>ספרייט</h3>
+    <img src="{% static 'Sprait.jpeg' %}" style="max-width:200px;">
+  </div>
+
+  <div>
+    <h3>מים</h3>
+    <img src="{% static 'Water.jpeg' %}" style="max-width:200px;">
+  </div>
+
+{% endblock %}

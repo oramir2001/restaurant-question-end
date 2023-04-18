@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+
+  <h1> starters dished </h1>
+
+  <div>
+    <h3>סלט אבוקדו ורימונים</h3>
+    <img src="{% static 'AvocadoSalad.jpeg' %}" style="max-width:200px;">
+  </div>
+
+  <div>
+    <h3>אנטי פסטי</h3>
+    <img src="{% static 'AntiPasti.jpeg' %}" style="max-width:200px;">
+  </div>
+
+  <div>
+    <h3>סלט ביצים</h3>
+    <img src="{% static 'EggSalad.jpeg' %}" style="max-width:200px;">
+  </div>
+
+  <div>
+    <h3>כנפיים עוף</h3>
+    <img src="{% static 'Wings.jpeg' %}" style="max-width:200px;">
+  </div>
+
+{% endblock %}

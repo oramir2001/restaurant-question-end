@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+
+  <h1> Desserts </h1>
+
+  <div>
+    <h3>גלידה</h3>
+    <img src="{% static 'IceCream.jpeg' %}" style="max-width:200px;">
+  </div>
+
+  <div>
+    <h3>עוגת גבינה</h3>
+    <img src="{% static 'CheeseCake.jpeg' %}" style="max-width:200px;">
+  </div>
+
+  <div>
+    <h3>עוגת שוקולד</h3>
+    <img src="{% static 'ChocolateCake.jpeg' %}" style="max-width:200px;">
+  </div>
+
+  <div>
+    <h3>קראק פאי</h3>
+    <img src="{% static 'CrackPai.jpeg' %}" style="max-width:200px;">
+  </div>
+
+{% endblock %}
