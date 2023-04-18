@@ -41,14 +41,30 @@ def signup(request):
     return redirect('login')
   return render(request,'signup.html')
 
+@login_required
 def starters(request):
   return render(request,'starters.html')
 
+@login_required
 def mains(request):
   return render(request,'mains.html')
 
+@login_required
 def desserts(request):
   return render(request,'desserts.html')
 
+@login_required
 def drinks(request):
   return render(request,'drinks.html')
+
+@login_required
+def add_dish(request):
+  return render(request,'add_dish.html')
+
+@login_required
+def remove_dish(request):
+  return render(request,'remove_dish.html')
+
+@login_required
+def checkout(request):
+  return render(request,'checkout.html')
