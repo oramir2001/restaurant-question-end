@@ -12,28 +12,28 @@
   <h1> menu </h1>
 
   <div>
-    <a href="/starters">
+    <a href="{%url 'starters-dishes'%}">
       <h3>מנות פתיחה</h3>
       <img src="{% static 'starters.jpeg' %}" style="max-width:200px;">
     </a>
   </div>
 
   <div>
-    <a href="/mains">
+    <a href="{%url 'main-dishes'%}">
       <h3>מנות עיקריות</h3>
       <img src="{% static 'mains.jpeg' %}" style="max-width:200px;">
     </a>
   </div>
 
   <div>
-    <a href="/desserts">
+    <a href="{%url 'desserts-menu'%}">
       <h3>קינוחים</h3>
       <img src="{% static 'desserts.jpeg' %}" style="max-width:200px;">
     </a>
   </div>
 
   <div>
-    <a href="/drinks">
+    <a href="{%url 'drinks-menu'%}">
       <h3>שתיה קלה</h3>
       <img src="{% static 'drinks.jpeg' %}" style="max-width:200px;">
     </a>
