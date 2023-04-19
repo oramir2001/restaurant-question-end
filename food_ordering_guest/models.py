@@ -3,12 +3,12 @@ from django.core.validators import MaxValueValidator
 from django.contrib.auth.models import User
 
 # Create your models here.
-class FoodOrderingGuest(models.Model):
-  user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
-  phone = models.CharField(max_length=10)
-  address = models.CharField(max_length=20)
-  age = models.CharField(max_length=20)
-  id = models.CharField(max_length=9)
+# class FoodOrderingGuest(models.Model):
+#   user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
+#   phone = models.CharField(max_length=10)
+#   address = models.CharField(max_length=20)
+#   age = models.CharField(max_length=20)
+#   id = models.CharField(max_length=9)
 
 class Category(models.Model):
   name = models.CharField(max_length=30)
@@ -17,7 +17,7 @@ class Category(models.Model):
 class Dish(models.Model):
   name = models.CharField(max_length=30)
   price = models.IntegerField(validators=[MaxValueValidator(999999999999999)])
-  descreption = models.CharField(max_length=500)
+  description = models.CharField(max_length=500)
   image = models.CharField(max_length=500)
   is_gluten_free = models.BooleanField(auto_created=False)
   is_vageterian = models.BooleanField(auto_created=False)
@@ -32,12 +32,8 @@ class Items(models.Model):
   amount = models.IntegerField(validators=[MaxValueValidator(999999999999999)])
 
 class Delivery(models.Model):
+  order_id = models.OneToOneField(Cart, on_delete=models.CASCADE)
   is_delivered = models.BooleanField(auto_created=False)
   address = models.CharField(max_length=500)
   comment = models.CharField(max_length=1000)
   created = models.DateTimeField(auto_now_add=True)
-
-
-
-
-
