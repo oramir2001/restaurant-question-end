@@ -21,18 +21,18 @@ class Dish(models.Model):
   image = models.CharField(max_length=500)
   is_gluten_free = models.BooleanField(auto_created=False)
   is_vageterian = models.BooleanField(auto_created=False)
-  category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
+  category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
 class Cart(models.Model):
-  user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Items(models.Model):
-  dish_id = models.ForeignKey(Dish, on_delete=models.CASCADE)
-  cart_id = models.ForeignKey(Cart, on_delete=models.CASCADE)
+  dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
+  cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
   amount = models.IntegerField(validators=[MaxValueValidator(999999999999999)])
 
 class Delivery(models.Model):
-  order_id = models.OneToOneField(Cart, on_delete=models.CASCADE)
+  order = models.OneToOneField(Cart, on_delete=models.CASCADE)
   is_delivered = models.BooleanField(auto_created=False)
   address = models.CharField(max_length=500)
   comment = models.CharField(max_length=1000)
