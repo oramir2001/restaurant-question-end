@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
-# from .models import FoodOrderingGuest
+from .models import Category, Dish
 
 def homepage(request):
   return render(request,'homepage.html')
@@ -17,7 +17,7 @@ def login_user(request):
     )
     if user is not None:
       auth.login(request,user)
-      return redirect('show_account')
+      return redirect('menu')
   return render(request,'login.html')
 
 def logout(request):
@@ -25,8 +25,9 @@ def logout(request):
   return redirect('login')
 
 @login_required(login_url='login')
-def show_account(request):
-  return render(request,'account.html')
+def menu(request):
+  category_list = Category.objects.all()
+  return render(request, 'menu.html', {'category_list': category_list})
 
 def signup(request):
   if request.method == "POST":
@@ -43,7 +44,8 @@ def signup(request):
 
 @login_required
 def starters(request):
-  return render(request,'starters.html')
+  dish_list = Dish.objects.all()
+  return render(request,'starters.html', {'dish_list': dish_list})
 
 @login_required
 def mains(request):

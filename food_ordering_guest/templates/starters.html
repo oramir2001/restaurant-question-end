@@ -2,38 +2,16 @@
 {% load static %}
 {% block content %}
 
-  <h1> Starters dished </h1>
+  <h1> Starter Dishes </h1>
 
-  <div>
-    <h3>סלט אבוקדו ורימונים</h3>
-    <label> מחיר: 35₪</label>
-    <p>תיאור המנה</p>
-    <img src="{% static 'AvocadoSalad.jpeg' %}" style="max-width:200px;"> <br/>
-    <button type="submit">Add to cart</button>
-  </div>
+  {% for dish in dish_list %}
+    <div>
+      <h3>{{ dish.name }}</h3>
+      <label>₪{{ dish.price }}</label>
+      <p> {{ dish.description }} </p>
+      <img src="{% static dish.image %}" style="max-width:200px;"> <br/>
+      <button type="submit">Add to cart</button>
+    </div>
 
-  <div>
-    <h3>אנטי פסטי</h3>
-    <label> מחיר: 29₪</label>
-    <p>תיאור המנה</p>
-    <img src="{% static 'AntiPasti.jpeg' %}" style="max-width:200px;"> <br/>
-    <button type="submit">Add to cart</button>
-  </div>
-
-  <div>
-    <h3>סלט ביצים</h3>
-    <label> מחיר: 35₪</label>
-    <p>תיאור המנה</p>
-    <img src="{% static 'EggSalad.jpeg' %}" style="max-width:200px;"> <br/>
-    <button type="submit">Add to cart</button>
-  </div>
-
-  <div>
-    <h3>כנפיים עוף</h3>
-    <label> מחיר: 42₪</label>
-    <p>תיאור המנה</p>
-    <img src="{% static 'Wings.jpeg' %}" style="max-width:200px;"> <br/>
-    <button type="submit">Add to cart</button>
-  </div>
-
-{% endblock %}
+  {% endfor %}
+ {% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+
+  <h3>Hi {{request.user.username}}, welcome back to our restaurant! </h3>
+  <h5>the last time you connected was before {{request.user.last_login | timesince}} ago </h5>
+
+  <form action="/logout">
+    <button type="submit">Logout</button>
+  </form>
+
+  <h1> Menu </h1>
+
+  {% for category in category_list %}
+    <a href="/menu/{{ category.name }}">
+      <h3>{{ category.name }}</h3>
+      <img src="{% static category.image %}" style="max-width:200px;">
+    </a>
+  {% endfor %}
+
+{% endblock %}
