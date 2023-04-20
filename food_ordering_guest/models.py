@@ -32,7 +32,7 @@ class Items(models.Model):
   amount = models.IntegerField(validators=[MaxValueValidator(999999999999999)])
 
 class Delivery(models.Model):
-  order = models.OneToOneField(Cart, on_delete=models.CASCADE)
+  order = models.OneToOneField(Cart, primary_key=True, on_delete=models.CASCADE)
   is_delivered = models.BooleanField(auto_created=False)
   address = models.CharField(max_length=500)
   comment = models.CharField(max_length=1000)
