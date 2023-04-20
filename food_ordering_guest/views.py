@@ -44,7 +44,7 @@ def signup(request):
 
 @login_required
 def starters(request):
-  dish_list = Dish.objects.all()
+  dish_list = Dish.objects.filter(category_id=1).values()
   return render(request,'starters.html', {'dish_list': dish_list})
 
 @login_required

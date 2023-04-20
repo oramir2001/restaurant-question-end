@@ -5,7 +5,7 @@
   <h1> Starter Dishes </h1>
 
   {% for dish in dish_list %}
-    <div>
+    <div style="margin: 4px; border:1px solid lightgray; padding: 2px 10px; ">
       <h3>{{ dish.name }}</h3>
       <label>₪{{ dish.price }}</label>
       <p> {{ dish.description }} </p>
