@@ -4,7 +4,17 @@
 
   <h1> Main dishes </h1>
 
-  <div>
+  {% for dish in dish_list %}
+    <div style="margin: 4px; border:1px solid lightgray; padding: 2px 10px; ">
+      <h3>{{ dish.name }}</h3>
+      <label>₪{{ dish.price }}</label>
+      <p> {{ dish.description }} </p>
+      <img src="{% static dish.image %}" style="max-width:200px;"> <br/>
+      <button type="submit">Add to cart</button>
+    </div>
+  {% endfor %}
+
+  <!-- <div>
     <h3>MEAL NAME</h3>
     <label>130₪</label>
     <p>תיאור המנה</p>
@@ -34,6 +44,6 @@
     <p>תיאור המנה</p>
     <img src="{% static MEAL NAME %}" style="max-width:200px;"> <br/>
     <button type="submit">Add to cart</button>
-  </div>
+  </div> -->
 
 {% endblock %}

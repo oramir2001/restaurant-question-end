@@ -49,15 +49,18 @@ def starters(request):
 
 @login_required
 def mains(request):
-  return render(request,'mains.html')
+  dish_list = Dish.objects.filter(category_id=2).values()
+  return render(request,'mains.html', {'dish_list': dish_list})
 
 @login_required
 def desserts(request):
-  return render(request,'desserts.html')
+  dish_list = Dish.objects.filter(category_id=3).values()
+  return render(request,'desserts.html', {'dish_list': dish_list})
 
 @login_required
 def drinks(request):
-  return render(request,'drinks.html')
+  dish_list = Dish.objects.filter(category_id=4).values()
+  return render(request,'drinks.html', {'dish_list': dish_list})
 
 @login_required
 def add_dish(request):
