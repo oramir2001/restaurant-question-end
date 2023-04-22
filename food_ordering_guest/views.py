@@ -63,13 +63,21 @@ def drinks(request):
   return render(request,'drinks.html', {'dish_list': dish_list})
 
 @login_required
-def add_dish(request):
-  return render(request,'add_dish.html')
+def cart(request):
+  # cart_list = []
+  # if request.method == "POST":
+  #   cart_list.append(Dish.objects.filter(dish_id = 'dish_id').values())
+  #   return redirect('cart')
+  return render(request,'cart.html')
 
-@login_required
-def remove_dish(request):
-  return render(request,'remove_dish.html')
+# @login_required
+# def add_dish(request):
+#   return render(request,'add_dish.html')
 
-@login_required
-def checkout(request):
-  return render(request,'checkout.html')
+# @login_required
+# def remove_dish(request):
+#   return render(request,'remove_dish.html')
+
+# @login_required
+# def checkout(request):
+#   return render(request,'checkout.html')

@@ -11,7 +11,8 @@ urlpatterns=[
   path('menu/mains/',views.mains,name="main-dishes"),
   path('menu/desserts/',views.desserts,name="desserts-menu"),
   path('menu/drinks/',views.drinks,name="drinks-menu"),
-  path('add-dish/',views.add_dish,name="add_dish"),
-  path('remove-dish/',views.remove_dish,name="remove_dish"),
-  path('checkout/',views.checkout,name="checkout")
+  path('menu/cart/',views.cart,name="my-cart"),
+  # path('add-dish/',views.add_dish,name="add_dish"),
+  # path('remove-dish/',views.remove_dish,name="remove_dish"),
+  # path('checkout/',views.checkout,name="checkout")
 ]
