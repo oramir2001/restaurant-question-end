@@ -68,17 +68,17 @@ def drinks(request):
 @login_required
 def cart(request):
   cart = Cart.objects.get(user_id=request.user.id)
-  cart_items = Items.objects.filter(cart_id = cart.id)
-  dish_ids = [item.dish_id for item in cart_items]
-  dishes = Dish.objects.filter(id__in = dish_ids)
-  print("**************************")
-  for dish in dishes :
-    pprint(dish.id)
-  return render(request,'cart.html', {'dishes': dishes})
+  cart_items = Items.objects.select_related('dish').filter(cart_id = cart.id)
+  return render(request,'cart.html', {'cart_items': cart_items})
 
-# @login_required
-# def add_dish(request):
-#   return render(request,'add_dish.html')
+@login_required
+def add_dish_to_cart(request):
+  if request.method == 'POST':
+    cart = Cart.objects.get(user_id=request.user.id)
+    dish_id = request.POST.get('dish_id')
+    dish_item = Items(cart_id=cart.id, dish_id = dish_id, amount=1)
+    dish_item.save()
+    return redirect('my-cart')
 
 # @login_required
 # def remove_dish(request):

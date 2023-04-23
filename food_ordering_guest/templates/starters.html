@@ -10,7 +10,9 @@
       <label>₪{{ dish.price }}</label>
       <p> {{ dish.description }} </p>
       <img src="{% static dish.image %}" style="max-width:200px;"> <br/>
-      <form action="">
+      <form action="{% url 'add-dish-to-cart' %}" method="POST">
+        <input type="hidden" name="dish_id" value="{{ dish.id }}">
+        {%csrf_token%}
         <button type="submit">Add to cart</button>
       </form>
     </div>

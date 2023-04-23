@@ -4,21 +4,19 @@
 
   <h1> Cart </h1>
 
+  <a href="{% url 'menu' %}">Back To Menu</a>
+
+  {% for item in cart_items %}
+    <div style="margin: 4px; border:1px solid lightgray; padding: 2px 10px; ">
+      <h3>{{ item.dish.name }}</h3>
+      <label>₪{{ item.dish.price }}</label>
+      <p> {{ item.dish.description }} </p>
+      <img src="{% static item.dish.image %}" style="max-width:200px;"> <br/>
+    </div>
+  {% endfor %}
+
   <form action="">
     <button type="submit">Check out</button>
   </form>
-
-  <form action="/menu">
-    <button type="submit">Back To Menu</button>
-  </form>
-
-  {% for dish in dishes %}
-    <div style="margin: 4px; border:1px solid lightgray; padding: 2px 10px; ">
-      <h3>{{ dish.name }}</h3>
-      <label>₪{{ dish.price }}</label>
-      <p> {{ dish.description }} </p>
-      <img src="{% static dish.image %}" style="max-width:200px;"> <br/>
-    </div>
-  {% endfor %}
 
 {% endblock %}
