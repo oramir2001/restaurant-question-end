@@ -11,4 +11,12 @@
     <button type="submit">Back To Menu</button>
   </form>
 
+  {% for item in items_list %}
+  <div>
+    <h3>{{ item.cart_id }}</h3>
+    <label>{{ item.amount }}</label>
+    <p> {{ item.dish_id }} </p>
+  </div>
+  {% endfor %}
+
 {% endblock %}

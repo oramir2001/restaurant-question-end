@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
-from .models import Category, Dish
+from .models import Category, Dish, Cart, Items
 
 def homepage(request):
   return render(request,'homepage.html')
@@ -64,11 +64,10 @@ def drinks(request):
 
 @login_required
 def cart(request):
-  # cart_list = []
-  # if request.method == "POST":
-  #   cart_list.append(Dish.objects.filter(dish_id = 'dish_id').values())
-  #   return redirect('cart')
-  return render(request,'cart.html')
+  cart_list = Cart.objects.filter(user_id=request.user.id)
+  cart = cart_list[0]
+  items_list = Items.objects.filter(cart_id = cart.id)
+  return render(request,'cart.html', {'items_list': items_list})
 
 # @login_required
 # def add_dish(request):
