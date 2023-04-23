@@ -64,10 +64,11 @@ def drinks(request):
 
 @login_required
 def cart(request):
-  cart_list = Cart.objects.filter(user_id=request.user.id)
-  cart = cart_list[0]
-  items_list = Items.objects.filter(cart_id = cart.id)
-  return render(request,'cart.html', {'items_list': items_list})
+  cart = Cart.objects.get(user_id=request.user.id)
+  cart_items = Items.objects.filter(cart_id = cart.id)
+  dish_ids = [item.id for item in cart_items]
+  dishes = Dish.objects.filter(id__in = dish_ids)
+  return render(request,'cart.html', {'dishes': dishes})
 
 # @login_required
 # def add_dish(request):

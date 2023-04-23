@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% load static %}
 {% block content %}
 
   <h1> Cart </h1>
@@ -11,12 +12,13 @@
     <button type="submit">Back To Menu</button>
   </form>
 
-  {% for item in items_list %}
-  <div>
-    <h3>{{ item.cart_id }}</h3>
-    <label>{{ item.amount }}</label>
-    <p> {{ item.dish_id }} </p>
-  </div>
+  {% for dish in dishes %}
+    <div style="margin: 4px; border:1px solid lightgray; padding: 2px 10px; ">
+      <h3>{{ dish.name }}</h3>
+      <label>₪{{ dish.price }}</label>
+      <p> {{ dish.description }} </p>
+      <img src="{% static dish.image %}" style="max-width:200px;"> <br/>
+    </div>
   {% endfor %}
 
 {% endblock %}
