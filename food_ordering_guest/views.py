@@ -5,6 +5,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from .models import Category, Dish, Cart, Items
 
+from pprint import pprint
+import inspect
+
 def homepage(request):
   return render(request,'homepage.html')
 
@@ -66,8 +69,11 @@ def drinks(request):
 def cart(request):
   cart = Cart.objects.get(user_id=request.user.id)
   cart_items = Items.objects.filter(cart_id = cart.id)
-  dish_ids = [item.id for item in cart_items]
+  dish_ids = [item.dish_id for item in cart_items]
   dishes = Dish.objects.filter(id__in = dish_ids)
+  print("**************************")
+  for dish in dishes :
+    pprint(dish.id)
   return render(request,'cart.html', {'dishes': dishes})
 
 # @login_required
