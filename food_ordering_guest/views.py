@@ -34,7 +34,7 @@ def show_dishes(request, id):
   category = Category.objects.get(id=id)
   dishes = Dish.objects.all()
   numbers = []
-  for num in range(1,100):
+  for num in range(1,10):
     numbers.append(num)
   return render(request, 'show_dishes.html', {'category': category, "dishes":dishes, "numbers":numbers})
 
@@ -89,6 +89,6 @@ def remove_dish_from_cart(request):
 
 @login_required
 def checkout(request):
-  # all_items = Items.objects.all()
-  # all_items
-  return render(request,'checkout.html')
+  cart = Cart.objects.filter(user_id=request.user.id).latest('id')
+  cart_items = Items.objects.select_related('dish').filter(cart_id = cart.id)
+  return render(request,'checkout.html', {'cart_items': cart_items})

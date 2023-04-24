@@ -70,3 +70,36 @@ INSERT INTO food_ordering_guest_cart (user_id) VALUES (1);
 --       dish_item = Items(cart_id=cart.id, dish_id = dish_id, amount=request.POST.get('amount'))
 --       dish_item.save()
 --     return redirect('my-cart')
+
+
+-- from checkout.html
+--  <br/>
+--   <h2>Order Details</h2>
+--   <form action="{% url 'menu' %}" method="GET">
+--     <div>
+--       <div>
+--         <input type="checkbox" name="is_deliverd" value="True">
+--         <label for="city">Is Deliverd</label>
+--       </div>
+--       <div>
+--         <input type="text" name="adderss" placeholder="Adderss" maxlength="500"> <br/>
+--       </div>
+--       <div>
+--         <input type="text" name="comment" placeholder="Add Comment" maxlength="1000"> <br/>
+--       </div>
+--       <div>
+--         <label for="datetime">Date and Time:</label>
+--         <input type="datetime-local" id="datetime" name="datetime" value="now">
+--       </div>
+--     </div>
+--     <button type="submit">Send Details & order</button>
+--   </form>
+
+-- from urls.py
+--   path('menu/checkout/',views.is_deliverd,name="is-deliverd")
+
+-- from views.py
+-- @login_required
+-- def is_deliverd(request):
+--   return render(request, 'menu.html')
+
