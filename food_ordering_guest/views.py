@@ -51,26 +51,6 @@ def signup(request):
     return redirect('login')
   return render(request,'signup.html')
 
-# @login_required
-# def starters(request):
-#   dish_list = Dish.objects.filter(category_id=1).values()
-#   return render(request,'starters.html', {'dish_list': dish_list})
-
-# @login_required
-# def mains(request):
-#   dish_list = Dish.objects.filter(category_id=2).values()
-#   return render(request,'mains.html', {'dish_list': dish_list})
-
-# @login_required
-# def desserts(request):
-#   dish_list = Dish.objects.filter(category_id=3).values()
-#   return render(request,'desserts.html', {'dish_list': dish_list})
-
-# @login_required
-# def drinks(request):
-#   dish_list = Dish.objects.filter(category_id=4).values()
-#   return render(request,'drinks.html', {'dish_list': dish_list})
-
 @login_required
 def cart(request):
   cart = Cart.objects.get(user_id=request.user.id)
@@ -86,10 +66,12 @@ def add_dish_to_cart(request):
     dish_item.save()
     return redirect('my-cart')
 
-
-# @login_required
-# def remove_dish(request):
-#   return render(request,'remove_dish.html')
+@login_required
+def remove_dish_from_cart(request):
+  if request.method == 'POST':
+    dish_id = request.POST.get('dish_id')
+    Items.objects.filter(dish_id=dish_id).delete()
+  return redirect('my-cart')
 
 # @login_required
 # def checkout(request):

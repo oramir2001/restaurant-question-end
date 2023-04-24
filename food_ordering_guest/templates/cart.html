@@ -12,6 +12,11 @@
       <img src="{% static item.dish.image %}" style="max-width:200px;"> <br/>
       <label>Price: ₪{{ item.dish.price }}</label><br>
       <label>Amount: {{ item.amount }}</label><br>
+      <form action="{% url 'remove-dish-from-cart' %}" method="POST">
+        {%csrf_token%}
+        <input type="hidden" name="dish_id" value="{{ item.dish.id }}">
+        <button type="submit">Remove Dish From Cart</button>
+      </form>
     </div>
   {% endfor %}
 
@@ -20,3 +25,8 @@
   </form>
 
 {% endblock %}
+
+
+<!-- <form action="{% url 'remove-dish-from-cart' %}" method="POST">
+        <button type="submit">Remove Dish</button>
+      </form> -->
