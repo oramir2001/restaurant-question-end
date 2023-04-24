@@ -10,6 +10,6 @@ urlpatterns=[
   path('menu/show_dishes/<int:id>/',views.show_dishes,name="show-dishes"),
   path('menu/cart/',views.cart,name="my-cart"),
   path('menu/add-dish-to-cart/',views.add_dish_to_cart,name="add-dish-to-cart"),
-  path('menu/remove-dish-from-cart',views.remove_dish_from_cart,name="remove-dish-from-cart")
-  # path('checkout/',views.checkout,name="checkout")
+  path('menu/remove-dish-from-cart',views.remove_dish_from_cart,name="remove-dish-from-cart"),
+  path('menu/checkout/',views.checkout,name="checkout")
 ]

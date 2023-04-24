@@ -20,13 +20,6 @@
     </div>
   {% endfor %}
 
-  <form action="">
-    <button type="submit">Check out</button>
-  </form>
+  <a href="{% url 'checkout' %}">Check Out</a>
 
 {% endblock %}
-
-
-<!-- <form action="{% url 'remove-dish-from-cart' %}" method="POST">
-        <button type="submit">Remove Dish</button>
-      </form> -->

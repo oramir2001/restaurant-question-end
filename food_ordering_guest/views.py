@@ -73,6 +73,6 @@ def remove_dish_from_cart(request):
     Items.objects.filter(dish_id=dish_id).delete()
   return redirect('my-cart')
 
-# @login_required
-# def checkout(request):
-#   return render(request,'checkout.html')
+@login_required
+def checkout(request):
+  return render(request,'checkout.html')
