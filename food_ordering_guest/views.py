@@ -60,10 +60,27 @@ def cart(request):
 @login_required
 def add_dish_to_cart(request):
   if request.method == 'POST':
-    cart = Cart.objects.get(user_id=request.user.id)
+    carts = Cart.objects.all()
+    many_items = Items.objects.all()
     dish_id = request.POST.get('dish_id')
-    dish_item = Items(cart_id=cart.id, dish_id = dish_id, amount=request.POST.get('amount'))
-    dish_item.save()
+    dish = Dish.objects.get(id=dish_id)
+    user_carts = 0
+    for cart in carts:
+      if cart.user == request.user:
+        if user_carts <= cart.id:
+          user_carts = cart.id
+    cart = Cart.objects.get(id=user_carts)
+    not_in_cart = 0
+    for item in many_items:
+      if item.cart == cart:
+        if item.dish == dish:
+          item.amount += int(request.POST['amount'])
+          item.save()
+          not_in_cart = 1
+    if not_in_cart == 0:
+      cart = Cart.objects.get(user_id=request.user.id)
+      dish_item = Items(cart_id=cart.id, dish_id = dish_id, amount=request.POST.get('amount'))
+      dish_item.save()
     return redirect('my-cart')
 
 @login_required
@@ -75,4 +92,6 @@ def remove_dish_from_cart(request):
 
 @login_required
 def checkout(request):
+  # all_items = Items.objects.all()
+  # all_items
   return render(request,'checkout.html')
