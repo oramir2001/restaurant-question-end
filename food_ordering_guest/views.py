@@ -3,10 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
-from .models import Category, Dish, Cart, Items
-
-from pprint import pprint
-import inspect
+from .models import Category, Dish, Cart, Items, Delivery
 
 def homepage(request):
   return render(request,'homepage.html')
@@ -32,6 +29,15 @@ def menu(request):
   category_list = Category.objects.all()
   return render(request, 'menu.html', {'category_list': category_list})
 
+@login_required(login_url='login')
+def show_dishes(request, id):
+  category = Category.objects.get(id=id)
+  dishes = Dish.objects.all()
+  numbers = []
+  for num in range(1,100):
+    numbers.append(num)
+  return render(request, 'show_dishes.html', {'category': category, "dishes":dishes, "numbers":numbers})
+
 def signup(request):
   if request.method == "POST":
     new_user = User(
@@ -45,25 +51,25 @@ def signup(request):
     return redirect('login')
   return render(request,'signup.html')
 
-@login_required
-def starters(request):
-  dish_list = Dish.objects.filter(category_id=1).values()
-  return render(request,'starters.html', {'dish_list': dish_list})
+# @login_required
+# def starters(request):
+#   dish_list = Dish.objects.filter(category_id=1).values()
+#   return render(request,'starters.html', {'dish_list': dish_list})
 
-@login_required
-def mains(request):
-  dish_list = Dish.objects.filter(category_id=2).values()
-  return render(request,'mains.html', {'dish_list': dish_list})
+# @login_required
+# def mains(request):
+#   dish_list = Dish.objects.filter(category_id=2).values()
+#   return render(request,'mains.html', {'dish_list': dish_list})
 
-@login_required
-def desserts(request):
-  dish_list = Dish.objects.filter(category_id=3).values()
-  return render(request,'desserts.html', {'dish_list': dish_list})
+# @login_required
+# def desserts(request):
+#   dish_list = Dish.objects.filter(category_id=3).values()
+#   return render(request,'desserts.html', {'dish_list': dish_list})
 
-@login_required
-def drinks(request):
-  dish_list = Dish.objects.filter(category_id=4).values()
-  return render(request,'drinks.html', {'dish_list': dish_list})
+# @login_required
+# def drinks(request):
+#   dish_list = Dish.objects.filter(category_id=4).values()
+#   return render(request,'drinks.html', {'dish_list': dish_list})
 
 @login_required
 def cart(request):
@@ -76,9 +82,10 @@ def add_dish_to_cart(request):
   if request.method == 'POST':
     cart = Cart.objects.get(user_id=request.user.id)
     dish_id = request.POST.get('dish_id')
-    dish_item = Items(cart_id=cart.id, dish_id = dish_id, amount=1)
+    dish_item = Items(cart_id=cart.id, dish_id = dish_id, amount=request.POST.get('amount'))
     dish_item.save()
     return redirect('my-cart')
+
 
 # @login_required
 # def remove_dish(request):

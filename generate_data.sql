@@ -43,3 +43,16 @@ INSERT INTO food_ordering_guest_cart (user_id) VALUES (1);
 -- INSERT INTO food_ordering_guest_delivery (is_deliverd, address, comment, order_id) VALUES (False,'Derech Hashalom 50','Leave The Door Man','');
 -- INSERT INTO food_ordering_guest_delivery (is_deliverd, address, comment, order_id) VALUES (True,'Oziel 101','Come Fast','');
 -- INSERT INTO food_ordering_guest_delivery (is_deliverd, address, comment, order_id) VALUES (True,'Harakefet 4','Thank You','');
+
+
+
+
+
+-- @login_required
+-- def add_dish_to_cart(request):
+--   if request.method == 'POST':
+--     cart = Cart.objects.get(user_id=request.user.id)
+--     dish_id = request.POST.get('dish_id')
+--     dish_item = Items(cart_id=cart.id, dish_id = dish_id, amount=request.POST.get('amount'))
+--     dish_item.save()
+--     return redirect('my-cart')
