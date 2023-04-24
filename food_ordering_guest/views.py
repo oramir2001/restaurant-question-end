@@ -53,41 +53,38 @@ def signup(request):
 
 @login_required
 def cart(request):
-  cart = Cart.objects.get(user_id=request.user.id)
+  cart = Cart.objects.filter(user_id=request.user.id).latest('id')
   cart_items = Items.objects.select_related('dish').filter(cart_id = cart.id)
   return render(request,'cart.html', {'cart_items': cart_items})
 
 @login_required
 def add_dish_to_cart(request):
-  if request.method == 'POST':
-    carts = Cart.objects.all()
-    many_items = Items.objects.all()
-    dish_id = request.POST.get('dish_id')
-    dish = Dish.objects.get(id=dish_id)
-    user_carts = 0
-    for cart in carts:
-      if cart.user == request.user:
-        if user_carts <= cart.id:
-          user_carts = cart.id
-    cart = Cart.objects.get(id=user_carts)
-    not_in_cart = 0
-    for item in many_items:
-      if item.cart == cart:
-        if item.dish == dish:
-          item.amount += int(request.POST['amount'])
-          item.save()
-          not_in_cart = 1
-    if not_in_cart == 0:
-      cart = Cart.objects.get(user_id=request.user.id)
-      dish_item = Items(cart_id=cart.id, dish_id = dish_id, amount=request.POST.get('amount'))
-      dish_item.save()
-    return redirect('my-cart')
+  if request.method != 'POST':
+    return None
+
+  dish_id = request.POST.get('dish_id')
+  amount = request.POST.get('amount')
+  cart = Cart.objects.filter(user_id=request.user.id).latest('id')
+
+  item, created = Items.objects.get_or_create(
+    cart_id=cart.id,
+    dish_id=dish_id,
+    defaults={'amount': amount}
+  )
+
+  if not created:
+    item.amount += int(amount)
+    item.save()
+    item.refresh_from_db()
+
+  return redirect('my-cart')
 
 @login_required
 def remove_dish_from_cart(request):
   if request.method == 'POST':
+    cart_id = request.POST.get('cart_id')
     dish_id = request.POST.get('dish_id')
-    Items.objects.filter(dish_id=dish_id).delete()
+    Items.objects.filter(dish_id=dish_id, cart_id=cart_id).delete()
   return redirect('my-cart')
 
 @login_required
