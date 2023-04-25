@@ -12,4 +12,7 @@ urlpatterns=[
   path('menu/add-dish-to-cart/',views.add_dish_to_cart,name="add-dish-to-cart"),
   path('menu/remove-dish-from-cart',views.remove_dish_from_cart,name="remove-dish-from-cart"),
   path('menu/checkout/',views.checkout,name="checkout"),
+  path('submit-order/',views.submit_order,name="submit-order"),
+  path('menu/thank-you/',views.thank_you,name="thank-you"),
+  path('menu/delivered/',views.delivered,name="delivered"),
 ]

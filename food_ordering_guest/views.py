@@ -91,4 +91,26 @@ def remove_dish_from_cart(request):
 def checkout(request):
   cart = Cart.objects.filter(user_id=request.user.id).latest('id')
   cart_items = Items.objects.select_related('dish').filter(cart_id = cart.id)
-  return render(request,'checkout.html', {'cart_items': cart_items})
+  sum = 0
+  for item in cart_items:
+    sum += (item.amount * item.dish.price)
+  return render(request,'checkout.html', {'cart_items': cart_items, 'sum': sum})
+
+@login_required
+def submit_order(request):
+  if request.method == 'POST':
+    Cart.objects.create(user_id=request.user.id)
+    return redirect('thank-you')
+
+@login_required
+def thank_you(request):
+  return render(request,'thank_you.html')
+
+@login_required
+def delivered(request):
+  carts_and_items = {}
+  carts = Cart.objects.filter(user_id=request.user.id)
+  for cart in carts:
+    cart_items = Items.objects.select_related('dish').filter(cart_id = cart.id)
+    carts_and_items[cart] = cart_items
+  return render(request, 'delivered.html', {'carts_and_items': carts_and_items})
