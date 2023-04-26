@@ -4,6 +4,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from .models import Category, Dish, Cart, Items, Delivery
+from datetime import datetime as dt
 
 def homepage(request):
   return render(request,'homepage.html')
@@ -99,12 +100,19 @@ def checkout(request):
 @login_required
 def submit_order(request):
   if request.method == 'POST':
+    cart = Cart.objects.filter(user_id=request.user.id).latest('id')
+    Delivery.objects.create(is_delivered=False, address=request.POST.get('address'), comment=request.POST.get('comment'), created=dt.now(), order_id=cart.id)
     Cart.objects.create(user_id=request.user.id)
     return redirect('thank-you')
 
 @login_required
 def thank_you(request):
-  return render(request,'thank_you.html')
+  delivery= Delivery.objects.all().latest('order_id')
+  delivery_items = Items.objects.filter(cart_id = delivery.order_id)
+  sum = 0
+  for item in delivery_items:
+    sum += (item.amount * item.dish.price)
+  return render(request,'thank_you.html', {'delivery': delivery, 'sum': sum })
 
 @login_required
 def delivered(request):
@@ -114,3 +122,7 @@ def delivered(request):
     cart_items = Items.objects.select_related('dish').filter(cart_id = cart.id)
     carts_and_items[cart] = cart_items
   return render(request, 'delivered.html', {'carts_and_items': carts_and_items})
+
+@login_required
+def change_details(request):
+ Delivery.objects.all()

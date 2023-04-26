@@ -15,4 +15,5 @@ urlpatterns=[
   path('submit-order/',views.submit_order,name="submit-order"),
   path('menu/thank-you/',views.thank_you,name="thank-you"),
   path('menu/delivered/',views.delivered,name="delivered"),
+  path('change-details/',views.change_details,name="change_details"),
 ]

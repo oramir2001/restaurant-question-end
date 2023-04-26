@@ -1,6 +1,17 @@
 {% extends 'layout.html' %}
+{% load static %}
 {% block content %}
+
   <h1>Welcome to our restaurant</h1>
+
+  <img src="{% static 'restraunt_logo.jpeg' %}" style="max-width:200px;">
+
+  <br/>
+
   <a href="{% url 'signup' %}">Signup</a>
+
+ <br/>
+
   <a href="{% url 'login' %}">Login</a>
-{% endblock %}
+
+  {% endblock %}
