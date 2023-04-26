@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+  <div>Deliveries Received</div>
+
+  {% for cart,items in carts_and_items.items %}
+    <div style="margin: 4px; border:1px solid lightgray; padding: 2px 10px; ">
+      <h3>Order Number: {{ cart.id }}</h3>
+      {% for item in items %}
+        <label>₪{{ item.dish.price }}</label>
+        <p> {{ item.dish.description }} </p>
+        <img src="{% static item.dish.image %}" style="max-width:100px;"> <br/>
+      {% endfor %}
+    </div>
+  {% endfor %}
+
+{% endblock %}
+
+
