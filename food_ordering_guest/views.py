@@ -125,4 +125,11 @@ def delivered(request):
 
 @login_required
 def change_details(request):
- Delivery.objects.all()
+  carts = Cart.objects.filter(user_id = request.user.id)
+  deliveries = []
+  for cart in carts:
+    delivery = Delivery.objects.filter(order_id = cart.id).latest('order_id')
+    deliveries.append(delivery)
+  print(deliveries)
+  print("**********")
+  return render(request, 'change_details.html', {'deliveries': deliveries})
