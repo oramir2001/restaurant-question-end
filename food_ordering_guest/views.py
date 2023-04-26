@@ -115,21 +115,22 @@ def thank_you(request):
   return render(request,'thank_you.html', {'delivery': delivery, 'sum': sum })
 
 @login_required
-def delivered(request):
+def orders(request):
   carts_and_items = {}
   carts = Cart.objects.filter(user_id=request.user.id)
   for cart in carts:
     cart_items = Items.objects.select_related('dish').filter(cart_id = cart.id)
     carts_and_items[cart] = cart_items
-  return render(request, 'delivered.html', {'carts_and_items': carts_and_items})
+  return render(request, 'orders.html', {'carts_and_items': carts_and_items})
 
 @login_required
 def change_details(request):
-  carts = Cart.objects.filter(user_id = request.user.id)
+  current_cart = Cart.objects.filter(user_id=request.user.id).latest('id')
+  carts = Cart.objects.filter(user_id = request.user.id).exclude(id = current_cart.id)
+
   deliveries = []
   for cart in carts:
-    delivery = Delivery.objects.filter(order_id = cart.id).latest('order_id')
+    delivery = Delivery.objects.get(order_id = cart.id)
     deliveries.append(delivery)
-  print(deliveries)
-  print("**********")
+
   return render(request, 'change_details.html', {'deliveries': deliveries})
