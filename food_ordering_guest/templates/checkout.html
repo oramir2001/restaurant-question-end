@@ -13,21 +13,27 @@
   {% endfor %}
 
   <h2>Total Price</h2>
+
   <div>
     required to pay: ₪{{sum}}
   </div>
 
   <h2>Order Details</h2>
+
   <form action="{% url 'submit-order' %}" method="POST">
     {%csrf_token%}
     <div>
+
       <div>
         <input type="text" name="address" placeholder="Adderss" maxlength="500"> <br/>
       </div>
+
       <div>
         <input type="text" name="comment" placeholder="Add Comment" maxlength="1000"> <br/>
       </div>
+
     </div>
+
     <button type="submit">Send Details & order</button>
   </form>
 

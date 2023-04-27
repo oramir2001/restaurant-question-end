@@ -3,12 +3,6 @@ from django.core.validators import MaxValueValidator
 from django.contrib.auth.models import User
 
 # Create your models here.
-# class FoodOrderingGuest(models.Model):
-#   user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
-#   phone = models.CharField(max_length=10)
-#   address = models.CharField(max_length=20)
-#   age = models.CharField(max_length=20)
-#   id = models.CharField(max_length=9)
 
 class Category(models.Model):
   name = models.CharField(max_length=30)

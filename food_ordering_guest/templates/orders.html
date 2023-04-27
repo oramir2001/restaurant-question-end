@@ -3,15 +3,23 @@
 {% block content %}
   <div>Deliveries Received</div>
 
+  <a href="{% url 'menu' %}">Back To Menu</a>
+  <a href="{% url 'change-details' %}">Change Details of Old Orders</a>
+
   {% for cart,items in carts_and_items.items %}
+
     <div style="margin: 4px; border:1px solid lightgray; padding: 2px 10px; ">
+
       <h3>Order Number: {{ cart.id }}</h3>
+
       {% for item in items %}
-        <label>₪{{ item.dish.price }}</label>
-        <p> {{ item.dish.description }} </p>
-        <img src="{% static item.dish.image %}" style="max-width:100px;"> <br/>
+      <p> {{ item.dish.description }} </p>
+      <img src="{% static item.dish.image %}" style="max-width:100px;"> <br/>
+      <label>₪{{ item.dish.price }}</label>
       {% endfor %}
+
     </div>
+
   {% endfor %}
 
 {% endblock %}

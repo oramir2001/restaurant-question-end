@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+  <h1>Staff Login</h1>
+
+  <div>
+    <input type="text" name="username" placeholder="Username"/>
+  </div>
+
+  <div>
+    <input type="password" name="password" placeholder="Password"/>
+  </div>
+
+  <button type="submit">Login</button>
+
+{% endblock %}
+
+
+
+<!--
+<form action="{% url 'staff-login' %}" method="POST">
+
+  {%csrf_token%}
+
+  <h1>Staff Login</h1>
+
+  <div>
+    <input type="text" name="username" placeholder="Username"/>
+  </div>
+
+  <div>
+    <input type="password" name="password" placeholder="Password"/>
+  </div>
+
+  <button type="submit">Login</button>
+
+  <a href="{% url 'staff-homepage' %}">Back To Staff Home Page</a>
+
+</form> -->

@@ -21,24 +21,6 @@ def login_user(request):
       return redirect('menu')
   return render(request,'login.html')
 
-def logout(request):
-  auth.logout(request)
-  return redirect('login')
-
-@login_required(login_url='login')
-def menu(request):
-  category_list = Category.objects.all()
-  return render(request, 'menu.html', {'category_list': category_list})
-
-@login_required(login_url='login')
-def show_dishes(request, id):
-  category = Category.objects.get(id=id)
-  dishes = Dish.objects.all()
-  numbers = []
-  for num in range(1,10):
-    numbers.append(num)
-  return render(request, 'show_dishes.html', {'category': category, "dishes":dishes, "numbers":numbers})
-
 def signup(request):
   if request.method == "POST":
     new_user = User(
@@ -52,6 +34,24 @@ def signup(request):
     return redirect('login')
   return render(request,'signup.html')
 
+@login_required(login_url='login')
+def menu(request):
+  category_list = Category.objects.all()
+  return render(request, 'menu.html', {'category_list': category_list})
+
+def logout(request):
+  auth.logout(request)
+  return redirect('login')
+
+@login_required(login_url='login')
+def show_dishes(request, id):
+  category = Category.objects.get(id=id)
+  dishes = Dish.objects.all()
+  numbers = []
+  for num in range(1,10):
+    numbers.append(num)
+  return render(request, 'show_dishes.html', {'category': category, "dishes":dishes, "numbers":numbers})
+
 @login_required
 def cart(request):
   cart = Cart.objects.filter(user_id=request.user.id).latest('id')
@@ -60,25 +60,29 @@ def cart(request):
 
 @login_required
 def add_dish_to_cart(request):
-  if request.method != 'POST':
-    return None
+    if request.method != 'POST':
+      return None
 
-  dish_id = request.POST.get('dish_id')
-  amount = request.POST.get('amount')
-  cart = Cart.objects.filter(user_id=request.user.id).latest('id')
+    dish_id = request.POST.get('dish_id')
+    amount = request.POST.get('amount')
 
-  item, created = Items.objects.get_or_create(
-    cart_id=cart.id,
-    dish_id=dish_id,
-    defaults={'amount': amount}
-  )
+    try:
+      cart = Cart.objects.filter(user_id=request.user.id).latest('id')
+    except Cart.DoesNotExist:
+      cart = Cart.objects.create(user_id=request.user.id)
 
-  if not created:
-    item.amount += int(amount)
-    item.save()
-    item.refresh_from_db()
+    item, created = Items.objects.get_or_create(
+      cart_id=cart.id,
+      dish_id=dish_id,
+      defaults={'amount': amount}
+    )
 
-  return redirect('my-cart')
+    if not created:
+      item.amount += int(amount)
+      item.save()
+      item.refresh_from_db()
+
+    return redirect('menu')
 
 @login_required
 def remove_dish_from_cart(request):
