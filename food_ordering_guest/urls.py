@@ -14,6 +14,8 @@ urlpatterns=[
   path('menu/checkout/',views.checkout,name="checkout"),
   path('submit-order/',views.submit_order,name="submit-order"),
   path('menu/thank-you/',views.thank_you,name="thank-you"),
-  path('menu/orders/',views.orders,name="orders"),
-  path('change-details/',views.change_details,name="change-details"),
+  path('orders/',views.orders,name="orders"),
+  path('orders/<int:order_id>',views.show_order,name="show-order"),
+  path('orders/<int:order_id>/edit',views.edit_order,name="edit-order"),
+  path('orders/<int:order_id>/update',views.update_order,name="update-order"),
 ]

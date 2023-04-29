@@ -2,8 +2,26 @@
 {% load static %}
 {% block content %}
 
-<h1>All Orders </h1>
+  <h1>All Orders </h1>
 
-<a href="{% url 'staff-menu' %}">Back to Home Page</a>
+  <a href="{% url 'staff-menu' %}">Back to Home Page</a>
+
+  {% for delivery in deliveries %}
+
+  <div style="margin: 4px; border:1px solid lightgray; padding: 2px 10px; ">
+
+    <h3>Order Number: {{ delivery.order_id }}</h3>
+
+    <p>Adress: {{delivery.address}}</p>
+
+    <p>comment: {{delivery.comment}}</p>
+
+    <p>Deliverd: {{delivery.is_delivered}} <input type="checkbox" id="sent_or_not" name="sent_or_not" value="false"></p>
+
+  </div>
+
+  {% endfor %}
 
 {% endblock %}
+
+

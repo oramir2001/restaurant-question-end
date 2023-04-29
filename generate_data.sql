@@ -45,28 +45,14 @@ INSERT INTO food_ordering_guest_cart (user_id) VALUES (1);
 -- INSERT INTO food_ordering_guest_delivery (is_deliverd, address, comment, order_id) VALUES (True,'Harakefet 4','Thank You','');
 
 
--- @login_required
--- def add_dish_to_cart(request):
---   if request.method == 'POST':
---     carts = Cart.objects.all()
---     many_items = Items.objects.all()
---     dish_id = request.POST.get('dish_id')
---     dish = Dish.objects.get(id=dish_id)
---     user_carts = 0
---     for cart in carts:
---       if cart.user == request.user:
---         if user_carts <= cart.id:
---           user_carts = cart.id
---     cart = Cart.objects.get(id=user_carts)
---     not_in_cart = 0
---     for item in many_items:
---       if item.cart == cart:
---         if item.dish == dish:
---           item.amount += int(request.POST['amount'])
---           item.save()
---           not_in_cart = 1
---     if not_in_cart == 0:
---       cart = Cart.objects.get(user_id=request.user.id)
---       dish_item = Items(cart_id=cart.id, dish_id = dish_id, amount=request.POST.get('amount'))
---       dish_item.save()
---     return redirect('my-cart')
+-- def login_user(request):
+--   if request.method == "POST":
+--     user = auth.authenticate(
+--       request,
+--       username=request.POST['username'],
+--       password=request.POST['password']
+--     )
+--     if user is not None:
+--       auth.login(request,user)
+--       return redirect('menu')
+--   return render(request,'login.html')

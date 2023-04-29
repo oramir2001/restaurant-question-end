@@ -3,79 +3,41 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
+from food_ordering_guest.models import Category, Dish, Cart, Items, Delivery
+from datetime import datetime as dt
 
-# Create your views here.
-
-
-def staff_homepage(request):
-  return render (request, 'staff_homepage.html')
-
-def staff_login(request):
-  # if request.method == "POST":
-  #   user = auth.authenticate(
-  #     request,
-  #     username=request.POST['username'],
-  #     password=request.POST['password']
-  # )
-  return render (request, 'staff_login.html')
-
-# @login_required(login_url='login')
+@login_required
 def staff_menu(request):
-  return render (request, 'staff_menu.html')
+  if request.user.is_staff == True:
+    return render (request, 'staff_menu.html')
+  else:
+    return redirect('menu')
 
-# def logout(request):
-#   auth.logout(request)
-#   return redirect('staff-login')
-
+@login_required
 def all_orders(request):
-  return render (request, 'all_orders.html')
+  if request.user.is_staff == True:
+    deliveries = Delivery.objects.all()
+    return render (request, 'all_orders.html',  {'deliveries': deliveries})
+  else:
+    return redirect('menu')
 
+# @login_required
+# def change_details(request):
+#   if request.user.is_staff == True:
+#     return render (request, 'change_details.html')
+#   else:
+#     return redirect('menu')
+
+@login_required
 def all_categories(request):
-  return render (request, 'all_categories.html')
+  if request.user.is_staff == True:
+    return render (request, 'all_categories.html')
+  else:
+    return redirect('menu')
 
+@login_required
 def all_dishes(request):
-  return render (request, 'all_dishes.html')
-
-
-
-
-
-
-
-
-
-
-
-# def signup_staff(request):
-#   if request.method == "POST":
-#     new_user = User(
-#       first_name = request.POST['first_name'],
-#       last_name = request.POST['last_name'],
-#       username = request.POST['username'],
-#       email = request.POST['email'],
-#       password = make_password(request.POST['password']),
-#       is_staff = request.POST.get('is_staff') == 'on'
-#     )
-#     new_user.save()
-#     return redirect('login')
-#   return render(request,'signup_staff.html')
-
-
-
-
-
-
-
-
-
-# def login(request):
-#   if request.method == "POST":
-#     user = auth.authenticate(
-#       request,
-#       username=request.POST['username'],
-#       password=request.POST['password']
-#     )
-#     if user is not None:
-#       auth.login(request,user)
-#       return redirect('menu')
-#   return render(request,'login.html')
+  if request.user.is_staff == True:
+    return render (request, 'all_dishes.html')
+  else:
+    return redirect('menu')

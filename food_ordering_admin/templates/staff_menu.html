@@ -2,36 +2,16 @@
 {% load static %}
 {% block content %}
 
-<h1>Teloy Management </h1>
+  <h1>Teloy Management </h1>
 
-<a href="{% url 'all-orders' %}">All Orders</a>
+  <a href="{% url 'all-orders' %}">All Orders</a>
 
-<a href="{% url 'all-categories' %}">All Categories</a>
+  <a href="{% url 'all-categories' %}">All Categories</a>
 
-<a href="{% url 'all-dishes' %}">All Dishes</a>
+  <a href="{% url 'all-dishes' %}">All Dishes</a>
 
-{% endblock %}
-
-<!-- <h3>Hi {{request.user.username}}, welcome back to our restaurant! </h3> -->
-<!-- <h5>the last time you connected was before {{request.user.last_login | timesince}} ago </h5> -->
-
-  <!-- <form action="/logout">
+  <form action="/logout">
     <button type="submit">Logout</button>
-  </form> -->
-<!--
-  <form action="/menu/cart">
-    <button type="submit">My Cart</button>
   </form>
 
-  <form action="/menu/orders">
-    <button type="submit">My All Orders</button>
-  </form> -->
-
-  <!-- <h1> Menu </h1>
-
-  {% for category in category_list %}
-    <a href="{% url 'show-dishes' id=category.id  %}">
-      <h3>{{ category.name }}</h3>
-      <img src="{% static category.image %}" style="max-width:200px;">
-    </a>
-  {% endfor %} -->
+{% endblock %}

@@ -18,7 +18,10 @@ def login_user(request):
     )
     if user is not None:
       auth.login(request,user)
-      return redirect('menu')
+      if request.user.is_staff == True:
+        return redirect('staff-menu')
+      else:
+        return redirect('menu')
   return render(request,'login.html')
 
 def signup(request):
@@ -128,7 +131,12 @@ def orders(request):
   return render(request, 'orders.html', {'carts_and_items': carts_and_items})
 
 @login_required
-def change_details(request):
+def show_order(request, order_id):
+  delivery = Delivery.objects.get(order_id)
+  return render(request, 'show_order.html', {'delivery': delivery})
+
+@login_required
+def edit_order(request):
   current_cart = Cart.objects.filter(user_id=request.user.id).latest('id')
   carts = Cart.objects.filter(user_id = request.user.id).exclude(id = current_cart.id)
 
@@ -137,4 +145,12 @@ def change_details(request):
     delivery = Delivery.objects.get(order_id = cart.id)
     deliveries.append(delivery)
 
-  return render(request, 'change_details.html', {'deliveries': deliveries})
+  return render(request, 'edit_order.html', {'deliveries': deliveries})
+
+@login_required
+def update_order(request):
+  if request.method == "POST":
+    # cart_ids = Cart.objects.filter(user_id=request.user.id).values('id')
+    # deliveries = Delivery.objects.filter(order_id__in=cart_ids)
+    order_id = request.GET.get('order_id')
+    return redirect('orders')

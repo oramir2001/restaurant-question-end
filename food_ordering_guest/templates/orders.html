@@ -4,7 +4,6 @@
   <div>Deliveries Received</div>
 
   <a href="{% url 'menu' %}">Back To Menu</a>
-  <a href="{% url 'change-details' %}">Change Details of Old Orders</a>
 
   {% for cart,items in carts_and_items.items %}
 
@@ -17,6 +16,8 @@
       <img src="{% static item.dish.image %}" style="max-width:100px;"> <br/>
       <label>₪{{ item.dish.price }}</label>
       {% endfor %}
+      <a href="{% url 'show-order' order_id=cart.id %}">Show</a>
+      <a href="{% url 'edit-order' order_id=cart.id %}">Edit</a>
 
     </div>
 
