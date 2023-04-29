@@ -1,11 +1,7 @@
 {% extends 'layout.html' %}
 {% load static %}
 {% block content %}
-  <h1>Deliveries Received</h1>
-
-  <div style="margin: 4px; border:1px solid lightgray; padding: 2px 10px; ">
-
-    <h3>Order Number: {{ delivery.order_id }}</h3>
+  <h1>Order #{{delivery.order_id}}</h1>
 
     {% for item in delivery_items %}
       <p> {{ item.dish.description }} </p>
@@ -13,7 +9,11 @@
       <label>Item Price: ₪{{ item.dish.price }}</label>
     {% endfor %}
 
-    <h4>Order Price: {{sum}}</h4>
+    <div style="margin-top: 20px;">
+      <div>Total Price: {{sum}}</div>
+      <div>Address: {{delivery.address}}</div>
+      <div>Comment: {{delivery.comment}}</div>
+    </div>
 
     <a href="{% url 'edit-order' order_id=delivery.order_id %}">Edit</a>
 

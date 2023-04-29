@@ -1,29 +1,20 @@
 {% extends 'layout.html' %}
+{% load static %}
 {% block content %}
 
-  <h2>Change Details</h2>
+  <h1>Edit Order #{{delivery.order_id}}</h1>
 
-  <table>
-
-    <thead>
-      <th>Order Number</th>
-      <th>Address</th>
-      <th>Comment</th>
-    </thead>
-
-    <tbody>
-      {% for delivery in deliveries %}
-        <tr>
-          <td>{{delivery.order_id}}</td>
-          <td>{{delivery.address}}</td>
-          <td>{{delivery.comment}}</td>
-          <td>
-            <a href="{% url 'change-details-input' %}">Change Details / {{delivery.order_id}}</a>
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-
-  </table>
+  <form action="/orders/{{delivery.order_id}}/update" method="POST">
+    {%csrf_token%}
+    <div>
+      <label>Address:</label>
+      <input type="text" value="{{delivery.address}}" name="address">
+    </div>
+    <div>
+      <label>Comment:</label>
+      <input type="text" value="{{delivery.comment}}" name="comment">
+    </div>
+    <button type="submit">Update</button>
+  </form>
 
 {% endblock %}

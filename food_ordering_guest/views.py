@@ -131,6 +131,7 @@ def orders(request):
 
   delivery= Delivery.objects.all().latest('order_id')
   delivery_items = Items.objects.filter(cart_id = delivery.order_id)
+
   sum = 0
   for item in delivery_items:
     sum += (item.amount * item.dish.price)
@@ -149,21 +150,22 @@ def show_order(request, order_id):
   return render(request, 'show_order.html', {'delivery': delivery, 'delivery_items': delivery_items, 'sum': sum})
 
 @login_required
-def edit_order(request):
-  current_cart = Cart.objects.filter(user_id=request.user.id).latest('id')
-  carts = Cart.objects.filter(user_id = request.user.id).exclude(id = current_cart.id)
+def edit_order(request, order_id):
+  delivery = Delivery.objects.filter(order_id=order_id).latest('order_id')
+  delivery_items = Items.objects.select_related('dish').filter(cart_id = delivery.order_id)
 
-  deliveries = []
-  for cart in carts:
-    delivery = Delivery.objects.get(order_id = cart.id)
-    deliveries.append(delivery)
+  sum = 0
+  for item in delivery_items:
+    sum += (item.amount * item.dish.price)
 
-  return render(request, 'edit_order.html', {'deliveries': deliveries})
+  return render(request, 'edit_order.html', {'delivery': delivery, 'delivery_items': delivery_items, 'sum': sum})
 
 @login_required
-def update_order(request):
+def update_order(request, order_id):
   if request.method == "POST":
-    # cart_ids = Cart.objects.filter(user_id=request.user.id).values('id')
-    # deliveries = Delivery.objects.filter(order_id__in=cart_ids)
-    order_id = request.GET.get('order_id')
-    return redirect('orders')
+    delivery = Delivery.objects.filter(order_id=order_id).latest('order_id')
+    delivery.address = request.POST.get('address')
+    delivery.comment = request.POST.get('comment')
+    delivery.save()
+    return redirect('/orders/' + str(order_id))
+
