@@ -21,13 +21,6 @@ def all_orders(request):
   else:
     return redirect('menu')
 
-# @login_required
-# def change_details(request):
-#   if request.user.is_staff == True:
-#     return render (request, 'change_details.html')
-#   else:
-#     return redirect('menu')
-
 @login_required
 def all_categories(request):
   if request.user.is_staff == True:
@@ -41,3 +34,11 @@ def all_dishes(request):
     return render (request, 'all_dishes.html')
   else:
     return redirect('menu')
+
+@login_required
+def mark_as_delivered(request, order_id):
+  if request.method == "POST":
+    delivery = Delivery.objects.filter(order_id=order_id).latest('order_id')
+    delivery.is_delivered = True
+    delivery.save()
+    return redirect('all-orders')
