@@ -13,6 +13,7 @@
       <div>Total Price: {{sum}}</div>
       <div>Address: {{delivery.address}}</div>
       <div>Comment: {{delivery.comment}}</div>
+      <div>Order time: {{ delivery.created }} </div>
     </div>
 
     <a href="{% url 'edit-order' order_id=delivery.order_id %}">Edit</a>

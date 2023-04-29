@@ -123,20 +123,16 @@ def thank_you(request):
 
 @login_required
 def orders(request):
-  carts_and_items = {}
-  carts = Cart.objects.filter(user_id=request.user.id)
+  carts_with_info = []
+  carts = Cart.objects.filter(user_id=request.user.id).order_by("-id")[1:]
   for cart in carts:
     cart_items = Items.objects.select_related('dish').filter(cart_id = cart.id)
-    carts_and_items[cart] = cart_items
+    sum = 0
+    for item in cart_items:
+      sum += (item.amount * item.dish.price)
+    carts_with_info.append([cart,cart_items,sum])
 
-  delivery= Delivery.objects.all().latest('order_id')
-  delivery_items = Items.objects.filter(cart_id = delivery.order_id)
-
-  sum = 0
-  for item in delivery_items:
-    sum += (item.amount * item.dish.price)
-
-  return render(request, 'orders.html', {'carts_and_items': carts_and_items, 'sum': sum})
+  return render(request, 'orders.html', {'carts_with_info': carts_with_info})
 
 @login_required
 def show_order(request, order_id):

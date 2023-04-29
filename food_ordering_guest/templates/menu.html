@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-  <h3>Hi {{request.user.username}}, welcome back to our restaurant! </h3>
+  <h3>Hi {{request.user.username}}, welcome back to Teloy Restaurant! </h3>
   <h5>the last time you connected was before {{request.user.last_login | timesince}} ago </h5>
 
   <form action="/logout">

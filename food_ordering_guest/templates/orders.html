@@ -5,25 +5,23 @@
 
   <a href="{% url 'menu' %}">Back To Menu</a>
 
-  {% for cart,items in carts_and_items.items %}
-
+  {% for cart_with_info in carts_with_info %}
     <div style="margin: 4px; border:1px solid lightgray; padding: 2px 10px; ">
 
-      <h3>Order Number: {{ cart.id }}</h3>
+      <h3>Order Number: {{ cart_with_info.0.id }}</h3>
 
-      {% for item in items %}
-      <p> {{ item.dish.description }} </p>
-      <img src="{% static item.dish.image %}" style="max-width:100px;"> <br/>
-      <label>₪{{ item.dish.price }}</label>
+      {% for item in cart_with_info.1 %}
+        <p> {{ item.dish.description }} </p>
+        <img src="{% static item.dish.image %}" style="max-width:100px;"> <br/>
+        <label>₪{{ item.dish.price }}</label>
       {% endfor %}
 
-      <h4>{{sum}}</h4>
+      <h4>Total Price: ₪{{cart_with_info.2}}</h4>
 
-      <a href="{% url 'show-order' order_id=cart.id %}">Show</a>
-      <a href="{% url 'edit-order' order_id=cart.id %}">Edit</a>
+      <a href="{% url 'show-order' order_id=cart_with_info.0.id %}">Show</a>
+      <a href="{% url 'edit-order' order_id=cart_with_info.0.id %}">Edit</a>
 
     </div>
-
   {% endfor %}
 
 {% endblock %}
