@@ -128,12 +128,25 @@ def orders(request):
   for cart in carts:
     cart_items = Items.objects.select_related('dish').filter(cart_id = cart.id)
     carts_and_items[cart] = cart_items
-  return render(request, 'orders.html', {'carts_and_items': carts_and_items})
+
+  delivery= Delivery.objects.all().latest('order_id')
+  delivery_items = Items.objects.filter(cart_id = delivery.order_id)
+  sum = 0
+  for item in delivery_items:
+    sum += (item.amount * item.dish.price)
+
+  return render(request, 'orders.html', {'carts_and_items': carts_and_items, 'sum': sum})
 
 @login_required
 def show_order(request, order_id):
-  delivery = Delivery.objects.get(order_id)
-  return render(request, 'show_order.html', {'delivery': delivery})
+  delivery = Delivery.objects.filter(order_id=order_id).latest('order_id')
+  delivery_items = Items.objects.select_related('dish').filter(cart_id = delivery.order_id)
+
+  sum = 0
+  for item in delivery_items:
+    sum += (item.amount * item.dish.price)
+
+  return render(request, 'show_order.html', {'delivery': delivery, 'delivery_items': delivery_items, 'sum': sum})
 
 @login_required
 def edit_order(request):
