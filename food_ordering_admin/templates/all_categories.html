@@ -15,7 +15,7 @@
   {% for category in categories %}
 
     <div style="margin: 4px; border:1px solid lightgray; padding: 2px 10px; ">
-      <h4>{{ category.name }} ({{ category.id }})</h4>
+      <h4>{{ category.name|title }} ({{ category.id }})</h4>
 
       <img src="{% static category.image %}" style="max-width:200px;">
       <br>
@@ -24,7 +24,7 @@
 
       <form action="{% url 'delete-category' category_id=category.id %}" method="POST">
         {% csrf_token %}
-        <button type="submit">Delete</button>
+        <button class="waves-effect waves-light btn-small" type="submit">Delete</button>
       </form>
 
     </div>

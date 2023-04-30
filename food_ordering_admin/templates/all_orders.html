@@ -18,7 +18,7 @@
     {% if not delivery.is_delivered %}
       <form action="/orders/{{delivery.order_id}}/mark-as-delivered" method="POST">
         {% csrf_token %}
-        <button type="submit">Mark As Delivered</button>
+        <button class="waves-effect waves-light btn-small" type="submit">Mark As Delivered</button>
       </form>
     {% endif %}
 
