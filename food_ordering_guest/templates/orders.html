@@ -18,8 +18,13 @@
 
       <div>Total Price: ₪{{cart_with_info.2}}</div>
 
-      <a href="{% url 'show-order' order_id=cart_with_info.0.id %}">Show</a>
-      <a href="{% url 'edit-order' order_id=cart_with_info.0.id %}">Edit</a>
+      <div>
+        <a href="{% url 'show-order' order_id=cart_with_info.0.id %}">Show</a>
+      </div>
+
+      <div>
+        <a href="{% url 'edit-order' order_id=cart_with_info.0.id %}">Edit</a>
+      </div>
 
     </div>
   {% endfor %}

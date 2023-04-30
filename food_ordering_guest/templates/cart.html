@@ -4,7 +4,13 @@
 
   <h4> Cart </h4>
 
-  <a href="{% url 'menu' %}">Back To Menu</a>
+  <div>
+    <a href="{% url 'menu' %}">Back To Menu</a>
+  </div>
+
+  <div>
+    <a href="{% url 'checkout' %}">Check Out</a>
+  </div>
 
   {% for item in cart_items %}
 
@@ -13,20 +19,18 @@
       <h4>{{ item.dish.name }}</h4>
 
       <img src="{% static item.dish.image %}" style="max-width:200px;"> <br/>
-      <label>Price: ₪{{ item.dish.price }}</label><br>
-      <label>Amount: {{ item.amount }}</label><br>
+      <p>Price: ₪{{ item.dish.price }}</p>
+      <p>Amount: {{ item.amount }}</p>
 
       <form action="{% url 'remove-dish-from-cart' %}" method="POST">
         {%csrf_token%}
         <input type="hidden" name="dish_id" value="{{ item.dish.id }}">
         <input type="hidden" name="item" value="{{ item.cart_id }}">
-        <button type="submit">Remove Dish From Cart</button>
+        <button class="waves-effect waves-light btn-small" type="submit">Remove From Cart</button>
       </form>
 
     </div>
 
   {% endfor %}
-
-  <a href="{% url 'checkout' %}">Check Out</a>
 
 {% endblock %}

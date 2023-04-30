@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-  <h4> {{category.name}} </h4>
+  <h4> {{category.name|title}}</h4>
 
   {% for dish in dishes %}
     {% if dish.category == category %}

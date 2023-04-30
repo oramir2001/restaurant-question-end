@@ -57,8 +57,13 @@ def show_dishes(request, id):
 
 @login_required
 def cart(request):
-  cart = Cart.objects.filter(user_id=request.user.id).latest('id')
+  try:
+    cart = Cart.objects.filter(user_id=request.user.id).latest('id')
+  except Cart.DoesNotExist:
+    cart = Cart.objects.create(user_id=request.user.id)
+
   cart_items = Items.objects.select_related('dish').filter(cart_id = cart.id)
+
   return render(request,'cart.html', {'cart_items': cart_items})
 
 @login_required
@@ -89,10 +94,11 @@ def add_dish_to_cart(request):
 
 @login_required
 def remove_dish_from_cart(request):
+  cart = Cart.objects.filter(user_id=request.user.id).latest('id')
+
   if request.method == 'POST':
-    cart_id = request.POST.get('cart_id')
     dish_id = request.POST.get('dish_id')
-    Items.objects.filter(dish_id=dish_id, cart_id=cart_id).delete()
+    Items.objects.filter(dish_id=dish_id, cart_id=cart.id).delete()
   return redirect('my-cart')
 
 @login_required

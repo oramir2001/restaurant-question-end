@@ -3,25 +3,23 @@
 {% block content %}
 
   <h4>Hi {{request.user.username}}, welcome back to Teloy Restaurant! </h4>
-  <h5>the last time you connected was before {{request.user.last_login | timesince}} ago </h5>
-
-  <form action="/logout">
-    <button type="submit">Logout</button>
-  </form>
+  <h6>the last time you connected was before {{request.user.last_login | timesince}} ago </h6>
+  <br>
 
   <form action="/menu/cart">
-    <button type="submit">My Cart</button>
+    <button style="margin-bottom: 6px;" class="waves-effect waves-light btn-small" type="submit">My Cart</button>
   </form>
 
   <form action="/orders">
-    <button type="submit">My Orders</button>
+    <button style="margin-bottom: 6px;" class="waves-effect waves-light btn-small" type="submit">My Orders</button>
   </form>
 
-  <h4> Menu </h4>
+  <form action="/logout">
+    <button style="margin-bottom: 6px;" class="waves-effect waves-light btn-small" type="submit">Logout</button>
 
   {% for category in category_list %}
     <a href="{% url 'show-dishes' id=category.id  %}">
-      <h4>{{ category.name }}</h4>
+      <h4>{{ category.name|title }}</h4>
       <img src="{% static category.image %}" style="max-width:200px;">
     </a>
   {% endfor %}

@@ -1,14 +1,18 @@
 {% extends 'layout.html' %}
 {% block content %}
 
-  <h2>Thank you {{ request.user.username }}! the order is on the way to you.</h2>
+  <h4>
+    Thank you {{ request.user.username }}!<br>
+    Your order is on its way.
+  </h4>
 
   <div>
     <div>Your order number is: {{ delivery.order_id }}</div>
-    <div>Order time: {{ delivery.created }} </div>
-    <div>Price: ₪{{ sum }}</div>
+    <div>Order placed on: {{ delivery.created }} </div>
+    <div>Total paid: ₪{{ sum }}</div>
   </div>
 
-  <a href="{% url 'menu' %}">Back To Menu</a>
+  <br>
+  <a href="{% url 'menu' %}">Back To Main Menu</a>
 
 {% endblock %}
