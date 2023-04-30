@@ -12,7 +12,7 @@ class Dish(models.Model):
   name = models.CharField(max_length=30)
   price = models.IntegerField(validators=[MaxValueValidator(999999999999999)])
   description = models.CharField(max_length=500)
-  image = models.CharField(max_length=500)
+  image = models.ImageField(upload_to='media/')
   is_gluten_free = models.BooleanField(auto_created=False)
   is_vageterian = models.BooleanField(auto_created=False)
   category = models.ForeignKey(Category, on_delete=models.CASCADE)

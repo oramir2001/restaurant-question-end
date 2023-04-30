@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+
+  <h1>New Dish</h1>
+
+  <form action="{% url 'create-dish' %}" method="POST" enctype="multipart/form-data">
+    <div>
+      <input type="text" name="name" placeholder="name">
+    </div>
+
+    <div>
+      <input type="text" name="price" placeholder="price">
+    </div>
+
+    <div>
+      <input type="text" name="description" placeholder="description">
+    </div>
+
+    <div>
+      <input type="file" name="image">
+    </div>
+
+    <div>
+      <input type="text" name="is_gluten_free" placeholder="is_gluten_free">
+    </div>
+
+    <div>
+      <input type="text" name="is_vageterian" placeholder="is_vageterian">
+    </div>
+
+    <div>
+      <select name="category_id">
+          {% for category in categories %}
+          <option value="{{category.id}}">{{category.name}}</option>
+          {% endfor %}
+        </select>
+    </div>
+
+    <button type="submit">Create</button>
+    {%csrf_token%}
+  </form>
+
+{% endblock %}
