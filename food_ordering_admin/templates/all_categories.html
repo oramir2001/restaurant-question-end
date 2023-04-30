@@ -16,7 +16,9 @@
 
       <img src="{% static category.image %}" style="max-width:200px;">
       <br>
+
       <a href="{% url 'edit-category' category_id=category.id %}">Edit</a>
+      <a href="{% url 'delete-category' category_id=category.id %}">Delete</a>
 
     </div>
 

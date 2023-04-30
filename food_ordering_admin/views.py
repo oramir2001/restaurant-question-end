@@ -33,22 +33,6 @@ def all_categories(request):
   return render (request, 'all_categories.html', {'categories':categories})
 
 @login_required
-def new_category(request):
-  if not request.user.is_staff:
-    return redirect('menu')
-
-  return render (request, 'new_category.html')
-
-@login_required
-def edit_category(request, category_id):
-  if not request.user.is_staff:
-    return redirect('menu')
-
-  category = Category.objects.filter(id=category_id).latest('id')
-
-  return render(request, 'edit_category.html', {'category': category})
-
-@login_required
 def create_category(request):
   if not request.user.is_staff:
     return redirect('menu')
@@ -68,6 +52,23 @@ def create_category(request):
 
     new_category.save()
     return redirect('all-categories')
+
+@login_required
+def new_category(request):
+  if not request.user.is_staff:
+    return redirect('menu')
+
+  return render (request, 'new_category.html')
+
+@login_required
+def edit_category(request, category_id):
+  if not request.user.is_staff:
+    return redirect('menu')
+
+  category = Category.objects.filter(id=category_id).latest('id')
+
+  return render(request, 'edit_category.html', {'category': category})
+
 
 @login_required
 def update_category(request, category_id):
@@ -90,6 +91,15 @@ def update_category(request, category_id):
     category.save()
     return redirect('all-categories')
 
+@login_required
+def delete_category(request, category_id):
+  if not request.user.is_staff:
+    return redirect('menu')
+
+  if request.method == "POST":
+    category = Category.objects.filter(id=category_id).latest('id')
+    category.delete()
+  return redirect('all-categories')
 
 @login_required
 def all_dishes(request):
