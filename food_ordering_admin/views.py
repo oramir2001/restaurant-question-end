@@ -41,7 +41,7 @@ def create_category(request):
     image_file = request.FILES.get('image')
 
     if image_file:
-      with open(os.path.join(settings.MEDIA_ROOT, image_file.name), 'wb+') as destination:
+      with open(os.path.join(settings.STATIC_DIR, image_file.name), 'wb+') as destination:
         for chunk in image_file.chunks():
           destination.write(chunk)
 

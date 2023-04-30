@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 class Category(models.Model):
   name = models.CharField(max_length=30)
-  image = models.ImageField(upload_to='media/')
+  image = models.ImageField(upload_to='static/')
 
 class Dish(models.Model):
   name = models.CharField(max_length=30)
