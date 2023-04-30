@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-  <h1>Edit Order #{{delivery.order_id}}</h1>
+  <h4>Edit Order #{{delivery.order_id}}</h4>
 
   <form action="/orders/{{delivery.order_id}}/update" method="POST">
     {%csrf_token%}

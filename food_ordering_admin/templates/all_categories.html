@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<h1>All Categories </h1>
+<h4>All Categories </h4>
 
 <div>
   <a href="{% url 'staff-menu' %}">Back to Homepage</a>
@@ -15,7 +15,7 @@
   {% for category in categories %}
 
     <div style="margin: 4px; border:1px solid lightgray; padding: 2px 10px; ">
-      <h3>{{ category.name }} ({{ category.id }})</h3>
+      <h4>{{ category.name }} ({{ category.id }})</h4>
 
       <img src="{% static category.image %}" style="max-width:200px;">
       <br>

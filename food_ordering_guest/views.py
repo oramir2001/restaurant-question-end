@@ -67,7 +67,7 @@ def add_dish_to_cart(request):
       return None
 
     dish_id = request.POST.get('dish_id')
-    amount = request.POST.get('amount')
+    amount = 1
 
     try:
       cart = Cart.objects.filter(user_id=request.user.id).latest('id')

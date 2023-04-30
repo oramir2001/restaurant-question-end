@@ -1,11 +1,11 @@
 {% extends 'layout.html' %}
 {% load static %}
 {% block content %}
-  <h1> checkout </h1>
+  <h4> checkout </h4>
 
   {% for item in cart_items %}
     <div style="margin: 4px; border:1px solid lightgray; padding: 2px 10px; ">
-      <h3>{{ item.dish.name }}</h3>
+      <h4>{{ item.dish.name }}</h4>
       <label>₪{{ item.dish.price }}</label>
       <p> {{ item.dish.description }} </p>
       <img src="{% static item.dish.image %}" style="max-width:100px;"> <br/>

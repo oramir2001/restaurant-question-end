@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-  <h3>Hi {{request.user.username}}, welcome back to Teloy Restaurant! </h3>
+  <h4>Hi {{request.user.username}}, welcome back to Teloy Restaurant! </h4>
   <h5>the last time you connected was before {{request.user.last_login | timesince}} ago </h5>
 
   <form action="/logout">
@@ -17,11 +17,11 @@
     <button type="submit">My Orders</button>
   </form>
 
-  <h1> Menu </h1>
+  <h4> Menu </h4>
 
   {% for category in category_list %}
     <a href="{% url 'show-dishes' id=category.id  %}">
-      <h3>{{ category.name }}</h3>
+      <h4>{{ category.name }}</h4>
       <img src="{% static category.image %}" style="max-width:200px;">
     </a>
   {% endfor %}

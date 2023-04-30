@@ -1,22 +1,22 @@
 {% extends 'layout.html' %}
 {% load static %}
 {% block content %}
-  <div>Deliveries Received</div>
 
-  <a href="{% url 'menu' %}">Back To Menu</a>
+<h4>Deliveries Received</h4>
+  <a class="waves-effect waves-light btn-small" href="{% url 'menu' %}">Back To Menu</a>
 
   {% for cart_with_info in carts_with_info %}
     <div style="margin: 4px; border:1px solid lightgray; padding: 2px 10px; ">
 
-      <h3>Order Number: {{ cart_with_info.0.id }}</h3>
+      <h5>Order Number: {{ cart_with_info.0.id }}</h5>
 
       {% for item in cart_with_info.1 %}
         <p> {{ item.dish.description }} </p>
         <img src="{% static item.dish.image %}" style="max-width:100px;"> <br/>
-        <label>₪{{ item.dish.price }}</label>
+        <p>₪{{ item.dish.price }}</p>
       {% endfor %}
 
-      <h4>Total Price: ₪{{cart_with_info.2}}</h4>
+      <div>Total Price: ₪{{cart_with_info.2}}</div>
 
       <a href="{% url 'show-order' order_id=cart_with_info.0.id %}">Show</a>
       <a href="{% url 'edit-order' order_id=cart_with_info.0.id %}">Edit</a>

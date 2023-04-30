@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-  <h1>All Dishes </h1>
+  <h4>All Dishes </h4>
 
   <div>
     <a href="{% url 'staff-menu' %}">Back to Home Page</a>
@@ -16,7 +16,7 @@
 
     <div style="margin: 4px; border:1px solid lightgray; padding: 2px 10px; ">
 
-      <h3>Dish Number: {{ dish.id }}</h3>
+      <h4>Dish Number: {{ dish.id }}</h4>
       <p>Dish Name: {{ dish.name }}</p>
       <p>Dish Price: ₪{{ dish.price }}</p>
       <p>Dish Description: {{ dish.description }}</p>

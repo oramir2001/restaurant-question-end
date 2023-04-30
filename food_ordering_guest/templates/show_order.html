@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% load static %}
 {% block content %}
-  <h1>Order #{{delivery.order_id}}</h1>
+  <h4>Order #{{delivery.order_id}}</h4>
 
     {% for item in delivery_items %}
       <p> {{ item.dish.description }} </p>
