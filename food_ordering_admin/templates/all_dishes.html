@@ -2,12 +2,15 @@
 {% load static %}
 {% block content %}
 
-<h1>All Dishes </h1>
+  <h1>All Dishes </h1>
 
-<a href="{% url 'staff-menu' %}">Back to Home Page</a>
+  <div>
+    <a href="{% url 'staff-menu' %}">Back to Home Page</a>
+  </div>
 
-<a href="{% url 'new-dish' %}">Add Dish</a>
-
+  <div>
+    <a href="{% url 'new-dish' %}">Add Dish</a>
+  </div>
 
   {% for dish in dishes %}
 

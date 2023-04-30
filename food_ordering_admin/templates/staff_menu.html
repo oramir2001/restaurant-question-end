@@ -4,13 +4,20 @@
 
   <h1>Teloy Management </h1>
 
-  <a href="{% url 'all-orders' %}">All Orders</a>
 
-  <a href="{% url 'all-categories' %}">All Categories</a>
+  <div>
+    <a href="{% url 'all-orders' %}">All Orders</a>
+  </div>
 
-  <a href="{% url 'all-dishes' %}">All Dishes</a>
+  <div>
+    <a href="{% url 'all-categories' %}">All Categories</a>
+  </div>
 
-  <form action="/logout">
+  <div>
+    <a href="{% url 'all-dishes' %}">All Dishes</a>
+  </div>
+
+  <form action="/logout" style="margin-top:12px">
     <button type="submit">Logout</button>
   </form>
 
