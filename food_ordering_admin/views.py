@@ -24,14 +24,16 @@ def all_orders(request):
 @login_required
 def all_categories(request):
   if request.user.is_staff == True:
-    return render (request, 'all_categories.html')
+    categories = Category.objects.all()
+    return render (request, 'all_categories.html', {'categories':categories})
   else:
     return redirect('menu')
 
 @login_required
 def all_dishes(request):
   if request.user.is_staff == True:
-    return render (request, 'all_dishes.html')
+    dishes = Dish.objects.all()
+    return render (request, 'all_dishes.html', {'dishes':dishes})
   else:
     return redirect('menu')
 

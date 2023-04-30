@@ -6,4 +6,25 @@
 
 <a href="{% url 'staff-menu' %}">Back to Home Page</a>
 
+  {% for dish in dishes %}
+
+    <div style="margin: 4px; border:1px solid lightgray; padding: 2px 10px; ">
+
+      <h3>Dish Number: {{ dish.id }}</h3>
+      <p>Dish Name: {{ dish.name }}</p>
+      <p>Dish Price: ₪{{ dish.price }}</p>
+      <p>Dish Description: {{ dish.description }}</p>
+      <p>Dish Is Gluten Free: {{ dish.is_gluten_free }}</p>
+      <p>Dish Is Vageterian: {{ dish.is_vageterian }}</p>
+      <p>Dish Category Id: {{ dish.category_id }}</p>
+
+      <div>
+        <p>Dish Image:</p>
+        <img src="{% static dish.image %}" style="max-width:200px;">
+      </div>
+
+    </div>
+
+  {% endfor %}
+
 {% endblock %}
