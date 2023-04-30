@@ -150,11 +150,7 @@ def edit_order(request, order_id):
   delivery = Delivery.objects.filter(order_id=order_id).latest('order_id')
   delivery_items = Items.objects.select_related('dish').filter(cart_id = delivery.order_id)
 
-  sum = 0
-  for item in delivery_items:
-    sum += (item.amount * item.dish.price)
-
-  return render(request, 'edit_order.html', {'delivery': delivery, 'delivery_items': delivery_items, 'sum': sum})
+  return render(request, 'edit_order.html', {'delivery': delivery, 'delivery_items': delivery_items})
 
 @login_required
 def update_order(request, order_id):

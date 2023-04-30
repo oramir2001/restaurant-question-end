@@ -18,6 +18,10 @@
 
     <a href="{% url 'edit-order' order_id=delivery.order_id %}">Edit</a>
 
+    <form action="/orders">
+      <button type="submit">Back TO All Orders</button>
+    </form>
+
   </div>
 
 {% endblock %}
