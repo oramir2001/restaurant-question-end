@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+
+  <h1>New Category</h1>
+
+  <form action="{% url 'create-category' %}" method="POST" enctype="multipart/form-data">
+    <div>
+      <input type="text" name="name" placeholder="name">
+    </div>
+    <div>
+      <input type="file" name="image">
+    </div>
+    <button type="submit">Create</button>
+    {%csrf_token%}
+  </form>
+
+  {% endblock %}
