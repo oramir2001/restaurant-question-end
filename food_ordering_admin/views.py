@@ -68,12 +68,34 @@ def new_category(request):
   return render (request, 'new_category.html')
 
 @login_required
+def edit_category(request, category_id):
+  if not request.user.is_staff:
+    return redirect('menu')
+
+  category = Category.objects.filter(id=category_id).latest('id')
+
+  return render(request, 'edit_category.html', {'category': category})
+
+@login_required
+def update_category(request, category_id):
+  if not request.user.is_staff:
+    return redirect('menu')
+
+  if request.method == "POST":
+    category = Category.objects.filter(id=category_id).latest('id')
+    category.name = request.POST.get('name')
+    # category.image = request.POST.get('image')
+    category.save()
+
+  return redirect('all-categories')
+
+@login_required
 def all_dishes(request):
   if not request.user.is_staff:
     return redirect('menu')
 
   dishes = Dish.objects.all()
-  return render (request, 'all_dishes.html', {'dishes':dishes})
+  return render (request, 'all_dishes.html', {'dishes': dishes})
 
 @login_required
 def mark_as_delivered(request, order_id):
