@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
+
 <form action="{% url 'login' %}" method="POST">
 
   {%csrf_token%}
@@ -16,7 +17,7 @@
 
   <button type="submit">Login</button>
 
-  <a href="{% url 'homepage' %}">Back To Home Page</a>
+  <a class="waves-effect waves-light btn" href="{% url 'homepage' %}">Back To Home Page</a>
 
 </form>
 {% endblock %}
