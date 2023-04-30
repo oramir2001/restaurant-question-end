@@ -1,10 +1,12 @@
-from django.db import models
-from django.core.validators import MaxValueValidator
-from django.contrib.auth.models import User
+# from django.db import models
+# from django.core.validators import MaxValueValidator
+# from django.contrib.auth.models import User
+
+# Create your models here.
 
 # class Category(models.Model):
 #   name = models.CharField(max_length=30)
-#   image = models.CharField(max_length=500)
+#   image = models.ImageField(upload_to='media/')
 
 # class Dish(models.Model):
 #   name = models.CharField(max_length=30)

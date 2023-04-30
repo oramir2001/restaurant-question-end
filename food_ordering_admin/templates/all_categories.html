@@ -5,11 +5,13 @@
 <h1>All Categories </h1>
 
 <a href="{% url 'staff-menu' %}">Back to Home Page</a>
+<div>
+  <a href="{% url 'new-category' %}">new category</a>
+</div>
 
   {% for category in categories %}
 
     <div style="margin: 4px; border:1px solid lightgray; padding: 2px 10px; ">
-
       <h3>Category Number: {{ category.id }}</h3>
       <p>Category Name: {{ category.name }}</p>
 
@@ -17,7 +19,6 @@
         <p>Category Image:</p>
         <img src="{% static category.image %}" style="max-width:200px;">
       </div>
-
     </div>
 
   {% endfor %}
