@@ -33,34 +33,6 @@ def all_categories(request):
   return render (request, 'all_categories.html', {'categories':categories})
 
 @login_required
-def create_category(request):
-  if not request.user.is_staff:
-    return redirect('menu')
-
-  if request.method == 'POST':
-    image_file = request.FILES.get('image')
-
-    if image_file:
-      with open(os.path.join(settings.STATIC_DIR, image_file.name), 'wb+') as destination:
-        for chunk in image_file.chunks():
-          destination.write(chunk)
-
-    new_category = Category(
-      name = request.POST.get('name'),
-      image = image_file.name if image_file else None
-    )
-
-    try:
-      new_category.full_clean()
-      new_category.save()
-    except ValidationError as e:
-      for field, errors in e.message_dict.items():
-        for error in errors:
-          print(f"{field}: {error}")
-
-    return redirect('all-categories')
-
-@login_required
 def new_category(request):
   if not request.user.is_staff:
     return redirect('menu')
@@ -77,6 +49,27 @@ def edit_category(request, category_id):
   return render(request, 'edit_category.html', {'category': category})
 
 @login_required
+def create_category(request):
+  if not request.user.is_staff:
+    return redirect('menu')
+
+  if request.method == 'POST':
+    image_file = request.FILES.get('image')
+
+    if image_file:
+      with open(os.path.join(settings.STATIC_URL, image_file.name), 'wb+') as destination:
+        for chunk in image_file.chunks():
+          destination.write(chunk)
+
+    new_category = Category(
+      name = request.POST.get('name'),
+      image = image_file.name if image_file else None
+    )
+
+    new_category.save()
+    return redirect('all-categories')
+
+@login_required
 def update_category(request, category_id):
   if not request.user.is_staff:
     return redirect('menu')
@@ -84,10 +77,19 @@ def update_category(request, category_id):
   if request.method == "POST":
     category = Category.objects.filter(id=category_id).latest('id')
     category.name = request.POST.get('name')
-    # category.image = request.POST.get('image')
-    category.save()
+    image_file = request.FILES.get('image')
 
-  return redirect('all-categories')
+    if image_file:
+
+      with open(os.path.join(settings.STATIC_URL, image_file.name), 'wb+') as destination:
+        for chunk in image_file.chunks():
+          destination.write(chunk)
+
+      category.image = image_file.name
+
+    category.save()
+    return redirect('all-categories')
+
 
 @login_required
 def all_dishes(request):
