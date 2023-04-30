@@ -18,7 +18,11 @@
       <br>
 
       <a href="{% url 'edit-category' category_id=category.id %}">Edit</a>
-      <a href="{% url 'delete-category' category_id=category.id %}">Delete</a>
+
+      <form action="{% url 'delete-category' category_id=category.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+      </form>
 
     </div>
 

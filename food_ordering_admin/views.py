@@ -96,9 +96,11 @@ def delete_category(request, category_id):
   if not request.user.is_staff:
     return redirect('menu')
 
+  print(category_id)
   if request.method == "POST":
-    category = Category.objects.filter(id=category_id).latest('id')
-    category.delete()
+    print('***************')
+    Category.objects.filter(id=category_id).delete()
+
   return redirect('all-categories')
 
 @login_required
