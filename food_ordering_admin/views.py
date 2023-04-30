@@ -38,22 +38,18 @@ def create_category(request):
     return redirect('menu')
 
   if request.method == 'POST':
-    # Get the uploaded file from the request.FILES dictionary
     image_file = request.FILES.get('image')
 
-    # Save the uploaded file to the media directory
     if image_file:
       with open(os.path.join(settings.MEDIA_ROOT, image_file.name), 'wb+') as destination:
         for chunk in image_file.chunks():
           destination.write(chunk)
 
-    # Create a new Category object and set its attributes
     new_category = Category(
       name = request.POST.get('name'),
       image = image_file.name if image_file else None
     )
 
-    # Validate and save the new Category object
     try:
       new_category.full_clean()
       new_category.save()
@@ -62,8 +58,7 @@ def create_category(request):
         for error in errors:
           print(f"{field}: {error}")
 
-    return redirect('staff-menu')
-
+    return redirect('all-categories')
 
 @login_required
 def new_category(request):

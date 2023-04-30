@@ -1,2 +1,3 @@
 .DS_Store
 django.log
+*/__pycache__/*
