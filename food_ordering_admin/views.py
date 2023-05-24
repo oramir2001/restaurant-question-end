@@ -1,11 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
-from django.contrib import auth
-from food_ordering_guest.models import Category, Dish, Cart, Items, Delivery
-from datetime import datetime as dt
-from django.core.exceptions import ValidationError
+from food_ordering_guest.models import Category, Dish, Delivery
 from django.conf import settings
 import os
 
