@@ -17,11 +17,11 @@
   <form action="/logout">
     <button style="margin-bottom: 6px;" class="waves-effect waves-light btn-small" type="submit">Logout</button>
 
-  {% for category in category_list %}
-    <a href="{% url 'show-dishes' id=category.id  %}">
-      <h4>{{ category.name|title }}</h4>
-      <img src="{% static category.image %}" style="max-width:200px;">
-    </a>
-  {% endfor %}
+    {% for category in category_list %}
+      <a href="{% url 'show-dishes' id=category.id  %}">
+        <h4>{{ category.name|title }}</h4>
+        <img src="{% static category.image %}" style="max-width:200px;">
+      </a>
+    {% endfor %}
 
 {% endblock %}

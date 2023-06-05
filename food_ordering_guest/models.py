@@ -8,6 +8,9 @@ class Category(models.Model):
   name = models.CharField(max_length=30)
   image = models.ImageField(upload_to='media/')
 
+  class Meta:
+    db_table = 'category'
+
 class Dish(models.Model):
   name = models.CharField(max_length=30)
   price = models.IntegerField(validators=[MaxValueValidator(999999999999999)])
@@ -17,13 +20,22 @@ class Dish(models.Model):
   is_vageterian = models.BooleanField(auto_created=False)
   category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
+  class Meta:
+    db_table = 'dish'
+
 class Cart(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+  class Meta:
+    db_table = 'cart'
 
 class Items(models.Model):
   dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
   cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
   amount = models.IntegerField(validators=[MaxValueValidator(999999999999999)])
+
+  class Meta:
+    db_table = 'item'
 
 class Delivery(models.Model):
   order = models.OneToOneField(Cart, primary_key=True, on_delete=models.CASCADE)
@@ -31,3 +43,6 @@ class Delivery(models.Model):
   address = models.CharField(max_length=500)
   comment = models.CharField(max_length=1000)
   created = models.DateTimeField(auto_now_add=True)
+
+  class Meta:
+    db_table = 'delivery'

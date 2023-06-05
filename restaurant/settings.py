@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-43i0#luhid2kq#9l3e$n8o^$ll8^%tg-9^@^wiyks&0mn(wv+4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["or-restaurant-project-container.happytree-72b53dc6.germanywestcentral.azurecontainerapps.io","127.0.0.1"]
 
 LOGGING = {
     'version': 1,
@@ -60,6 +60,12 @@ INSTALLED_APPS = [
   'food_ordering_guest',
   'food_ordering_admin'
 ]
+
+#CSRF
+CSRF_TRUSTED_ORIGINS = [
+  "https://or-restaurant-project-container.happytree-72b53dc6.germanywestcentral.azurecontainerapps.io"
+]
+
 
 MIDDLEWARE = [
   'django.middleware.security.SecurityMiddleware',
@@ -99,8 +105,12 @@ WSGI_APPLICATION = 'restaurant.wsgi.application'
 
 DATABASES = {
   'default': {
-    'ENGINE': 'django.db.backends.sqlite3',
-    'NAME': BASE_DIR / 'db.sqlite3',
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'postgres',
+    'USER': 'oramir',
+    'PASSWORD': 'or_amir2910',
+    'HOST': 'ors-restaurant-project.postgres.database.azure.com',
+    'PORT': ''
   }
 }
 
